@@ -8,32 +8,63 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
+  // Debug logging
+  console.log("Current theme:", theme);
+
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors" dir="rtl">
-      <header className="sticky top-0 z-30 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm">
+    <div
+      className="min-h-screen bg-custom-bg text-custom-text transition-colors "
+      dir="rtl"
+    >
+      <header className="sticky top-0 z-30 bg-custom-card/95 backdrop-blur-sm border-b border-custom-border shadow-sm transition-all">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <Link to="/users" className="flex items-center gap-2 font-bold text-lg text-blue-600 dark:text-blue-400">
+          <Link
+            to="/users"
+            className="flex items-center gap-2 font-bold text-lg text-custom-accent"
+          >
             <span className="text-2xl">🛡️</span>
             <span>مدیریت کاربران</span>
           </Link>
           <nav className="hidden sm:flex items-center gap-6">
-            <Link to="/users" className="text-sm text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+            <Link
+              to="/users"
+              className="text-sm text-custom-muted hover:text-custom-accent transition-colors"
+            >
               کاربران
             </Link>
           </nav>
           <div className="flex items-center gap-2">
-            <button onClick={toggleTheme} title="تغییر تم"
-              className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-xl">
-              {theme === "dark" ? "☀️" : "🌙"}
+            <button
+              onClick={toggleTheme}
+              title={
+                theme === "dark" ? "تغییر به حالت روشن" : "تغییر به حالت تاریک"
+              }
+className="p-2 rounded-lg hover:bg-custom-hover transition-colors text-xl cursor-pointer"            >
+              {theme === "dark" ? (
+                <span role="img" aria-label="sun">
+                  ☀️
+                </span>
+              ) : (
+                <span role="img" aria-label="moon">
+                  🌙
+                </span>
+              )}
             </button>
-            <button onClick={() => { logout(); navigate("/login"); }}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+            <button
+              onClick={() => {
+                logout();
+                navigate("/login");
+              }}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg text-custom-text hover:bg-custom-hover transition-colors"
+            >
               خروج <span>→</span>
             </button>
           </div>
         </div>
       </header>
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">{children}</main>
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {children}
+      </main>
     </div>
   );
 }

@@ -33,21 +33,27 @@ const COLUMNS: {
   sortable: boolean;
   className?: string;
 }[] = [
-  { key: "id",          label: "شناسه",        sortable: false, className: "w-16" },
-  { key: "username",    label: "نام کاربری",   sortable: true  },
-  { key: "email",       label: "ایمیل",        sortable: true  },
-  { key: "first_name",  label: "نام کامل",     sortable: true  },
-  { key: "role",        label: "نقش",          sortable: false },
-  { key: "is_active",   label: "وضعیت",        sortable: true  },
-  { key: "date_joined", label: "تاریخ عضویت",  sortable: true  },
-  { key: "actions",     label: "عملیات",       sortable: false, className: "w-24" },
+  { key: "id", label: "شناسه", sortable: false, className: "w-16" },
+  { key: "username", label: "نام کاربری", sortable: true },
+  { key: "email", label: "ایمیل", sortable: true },
+  { key: "first_name", label: "نام کامل", sortable: true },
+  { key: "role", label: "نقش", sortable: false },
+  { key: "is_active", label: "وضعیت", sortable: true },
+  { key: "date_joined", label: "تاریخ عضویت", sortable: true },
+  { key: "actions", label: "عملیات", sortable: false, className: "w-24" },
 ];
 
 // ── Sort Icon ──────────────────────────────────────────────────
 
-function SortIcon({ field, sortConfig }: { field: string; sortConfig: SortConfig }) {
+function SortIcon({
+  field,
+  sortConfig,
+}: {
+  field: string;
+  sortConfig: SortConfig;
+}) {
   if (sortConfig.field !== field) {
-    return <span className="text-gray-300 dark:text-gray-600 text-xs">↕</span>;
+    return <span className="text-custom-muted text-xs">↕</span>;
   }
   return (
     <span className="text-blue-500 text-xs font-bold">
@@ -150,7 +156,7 @@ export default function UsersTable({
     <div className="overflow-x-auto">
       <table className="w-full text-sm">
         <TableHead sortConfig={sortConfig} onSort={onSort} />
-        <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
+        <tbody className="divide-y divide-custom-border">
           {users.map((user) => (
             <UserRow
               key={user.id}
@@ -164,9 +170,9 @@ export default function UsersTable({
 
       {/* Subtle loading overlay when refreshing existing data */}
       {loading && users.length > 0 && (
-        <div className="flex items-center justify-center gap-2 py-3 border-t border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50">
+        <div className="flex items-center justify-center gap-2 py-3 border-t border-custom-border bg-custom-hover">
           <Spinner size="sm" />
-          <span className="text-xs text-gray-400">در حال بروزرسانی...</span>
+          <span className="text-xs text-custom-muted">در حال بروزرسانی...</span>
         </div>
       )}
     </div>
@@ -183,19 +189,21 @@ function TableHead({
   onSort: (field: string) => void;
 }) {
   return (
-    <thead className="bg-gray-50 dark:bg-gray-700/50 border-b border-gray-200 dark:border-gray-700">
+    <thead className="bg-custom-hover border-b border-custom-border">
       <tr>
         {COLUMNS.map((col) => (
           <th
             key={col.key}
-            className={`px-4 py-3 text-right text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide whitespace-nowrap ${col.className ?? ""} ${
+            className={`px-4 py-3 text-center text-xs font-semibold text-custom-muted uppercase tracking-wide whitespace-nowrap ${
+              col.className ?? ""
+            } ${
               col.sortable
-                ? "cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors select-none"
+                ? "cursor-pointer hover:bg-custom-hover transition-colors select-none"
                 : ""
             }`}
             onClick={() => col.sortable && onSort(col.key)}
           >
-            <span className="inline-flex items-center justify-end gap-1.5">
+            <span className="inline-flex items-center justify-center gap-1.5">
               {col.label}
               {col.sortable && (
                 <SortIcon field={col.key} sortConfig={sortConfig} />
@@ -223,27 +231,27 @@ function UserRow({
 
   return (
     <tr
-      className={`group transition-colors hover:bg-gray-50 dark:hover:bg-gray-700/30 ${
+      className={`group transition-colors hover:bg-custom-hover ${
         isDef ? "bg-blue-50/20 dark:bg-blue-900/5" : ""
       }`}
     >
       {/* ID */}
-      <td className="px-4 py-3">
-        <span className="font-mono text-xs text-gray-400 dark:text-gray-500">
+      <td className="px-4 py-3 text-center">
+        <span className="font-mono text-xs text-custom-muted">
           #{user.id}
         </span>
       </td>
 
       {/* Username */}
-      <td className="px-4 py-3">
-        <div className="flex items-center gap-2.5">
+      <td className="px-4 py-3 text-center">
+        <div className="flex items-center  gap-2.5">
           <UserAvatar username={user.username} />
           <div className="min-w-0">
-            <p className="font-medium text-gray-900 dark:text-gray-100 truncate">
+            <p className="font-medium text-custom-text truncate">
               {user.username}
             </p>
             {isDef && (
-              <span className="text-xs text-blue-500 dark:text-blue-400">
+              <span className="text-xs text-custom-accent">
                 پیش‌فرض سیستم
               </span>
             )}
@@ -252,9 +260,9 @@ function UserRow({
       </td>
 
       {/* Email */}
-      <td className="px-4 py-3">
+      <td className="px-4 py-3 text-center">
         <span
-          className="text-gray-600 dark:text-gray-300 text-xs truncate block max-w-[200px]"
+          className="text-custom-text text-xs truncate block max-w-[200px]"
           title={user.email}
         >
           {user.email || "—"}
@@ -262,16 +270,16 @@ function UserRow({
       </td>
 
       {/* Full Name */}
-      <td className="px-4 py-3">
-        <span className="text-gray-700 dark:text-gray-300">
+      <td className="px-4 py-3 text-center">
+        <span className="text-custom-text">
           {[user.first_name, user.last_name].filter(Boolean).join(" ") || (
-            <span className="text-gray-400">—</span>
+            <span className="text-custom-muted">—</span>
           )}
         </span>
       </td>
 
       {/* Role */}
-      <td className="px-4 py-3">
+      <td className="px-4 py-3 text-center">
         <Badge
           text={user.profile?.role === "admin" ? "مدیر" : "کاربر"}
           variant={user.profile?.role === "admin" ? "info" : "default"}
@@ -279,7 +287,7 @@ function UserRow({
       </td>
 
       {/* Status */}
-      <td className="px-4 py-3">
+      <td className="px-4 py-3 text-center">
         <Badge
           text={user.is_active ? "فعال" : "غیرفعال"}
           variant={user.is_active ? "success" : "danger"}
@@ -287,23 +295,29 @@ function UserRow({
       </td>
 
       {/* Date Joined */}
-      <td className="px-4 py-3">
-        <span className="text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">
+      <td className="px-4 py-3 text-center">
+        <span className="text-xs text-custom-muted whitespace-nowrap">
           {formatDate(user.date_joined)}
         </span>
       </td>
 
       {/* Actions */}
-      <td className="px-4 py-3">
-        <div className="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+      <td className="px-4 py-3 text-center">
+        <div className="flex items-center justify-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
           {/* Edit */}
           <Button
             variant="ghost"
             size="sm"
             onClick={onEdit}
             disabled={isDef}
-            title={isDef ? "کاربران پیش‌فرض قابل ویرایش نیستند" : "ویرایش کاربر"}
-            className={`${isDef ? "opacity-30 cursor-not-allowed" : "hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20"}`}
+            title={
+              isDef ? "کاربران پیش‌فرض قابل ویرایش نیستند" : "ویرایش کاربر"
+            }
+            className={`${
+              isDef
+                ? "opacity-30 cursor-not-allowed"
+                : "hover:text-custom-accent hover:bg-blue-50 dark:hover:bg-blue-900/20"
+            }`}
           >
             ✏️
           </Button>

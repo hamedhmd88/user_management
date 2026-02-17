@@ -26,10 +26,10 @@ export default function MenuPermissionTree({ menus, selectedIds, onChange, disab
     );
   }
 
-  if (!menus.length) return <p className="text-sm text-gray-500 dark:text-gray-400">هیچ منویی یافت نشد.</p>;
+  if (!menus.length) return <p className="text-sm text-custom-muted">هیچ منویی یافت نشد.</p>;
 
   return (
-    <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden divide-y divide-gray-200 dark:divide-gray-700">
+    <div className="border border-custom-border rounded-lg overflow-hidden divide-y divide-custom-border">
       {menus.map((menu) => {
         const subIds = menu.submenus.map((s) => s.id);
         const allChecked = subIds.length > 0 && subIds.every(isSelected);
@@ -38,7 +38,7 @@ export default function MenuPermissionTree({ menus, selectedIds, onChange, disab
         return (
           <div key={menu.id}>
             {/* Parent */}
-            <div className="flex items-center gap-3 px-4 py-3 bg-gray-50 dark:bg-gray-800/60">
+            <div className="flex items-center gap-3 px-4 py-3 bg-custom-hover">
               {subIds.length > 0 && (
                 <IndetermCheckbox
                   checked={allChecked}
@@ -47,21 +47,21 @@ export default function MenuPermissionTree({ menus, selectedIds, onChange, disab
                   disabled={disabled}
                 />
               )}
-              <span className="text-sm font-semibold text-gray-800 dark:text-gray-200">
+              <span className="text-sm font-semibold text-custom-text">
                 {menu.title || menu.name || `منو ${menu.id}`}
               </span>
               {subIds.length > 0 && (
-                <span className="mr-auto text-xs text-gray-400">
+                <span className="mr-auto text-xs text-custom-muted">
                   {subIds.filter(isSelected).length}/{subIds.length}
                 </span>
               )}
             </div>
             {/* Submenus */}
-            <div className="divide-y divide-gray-100 dark:divide-gray-700/40">
+            <div className="divide-y divide-custom-border">
               {menu.submenus.map((sub) => (
                 <label
                   key={sub.id}
-                  className={`flex items-center gap-3 px-6 py-2.5 hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors ${disabled ? "cursor-not-allowed opacity-70" : "cursor-pointer"}`}
+                  className={`flex items-center gap-3 px-6 py-2.5 hover:bg-custom-hover transition-colors ${disabled ? "cursor-not-allowed opacity-70" : "cursor-pointer"}`}
                 >
                   <input
                     type="checkbox"
@@ -70,7 +70,7 @@ export default function MenuPermissionTree({ menus, selectedIds, onChange, disab
                     disabled={disabled}
                     className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                   />
-                  <span className="text-sm text-gray-700 dark:text-gray-300">
+                  <span className="text-sm text-custom-text">
                     {sub.title || sub.name || `زیرمنو ${sub.id}`}
                   </span>
                 </label>

@@ -1,5 +1,36 @@
 @import "tailwindcss";
 
+/* تعریف متغیرهای رنگی برای تم روشن و تاریک */
+:root {
+  --color-bg: #cdcdcdd4;
+  --color-text: #374151;
+  --color-border: #d1d5db;
+  --color-hover: #f3f4f6;
+  --color-card: #ffffff;
+  --color-muted: #6b7280;
+  --color-accent: #3b82f6;
+}
+
+.dark {
+  --color-bg: #1a1a1a;
+  --color-text: #e5e7eb;
+  --color-border: #374151;
+  --color-hover: #2d3748;
+  --color-card: #2d3748;
+  --color-muted: #e6f0ff;
+  --color-accent: #60a5fa;
+}
+
+@theme inline {
+        --custom-bg: var(--color-bg);
+        --custom-text: var(--color-text);
+        --custom-border: var(--color-border);
+        --custom-hover: var(--color-hover);
+        --custom-card: var(--color-card);
+        --custom-muted: var(--color-muted);
+        --custom-accent: var(--color-accent);
+}
+
 @layer utilities {
   .animate-slide-in {
     animation: slideIn 0.2s ease-out;
@@ -11,3 +42,25 @@
 }
 
 * { direction: rtl; font-family: 'Vazirmatn', system-ui, sans-serif; }
+
+/* اعمال متغیرهای رنگی به بدنه */
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* استایل‌های سفارشی برای آپشن‌های سلکت */
+select option {
+  background-color: #374151;
+  color: var(--color-text);
+  padding: 8px 12px;
+  font-size: 14px;
+  border: none;
+}
+
+select option:hover {
+  background-color: #4b5563;
+  
+}
+

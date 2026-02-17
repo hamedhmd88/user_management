@@ -6,7 +6,7 @@ export default function Spinner({ size = "md" }: { size?: "sm" | "md" | "lg" }) 
     <div
       role="status"
       aria-label="در حال بارگذاری"
-      className={`animate-spin rounded-full border-2 border-gray-300 border-t-blue-600 ${SZ[size]}`}
+      className={`animate-spin rounded-full border-2 border-custom-border border-t-custom-accent ${SZ[size]}`}
     />
   );
 }

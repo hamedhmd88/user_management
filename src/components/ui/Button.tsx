@@ -17,10 +17,10 @@ interface Props {
 }
 
 const VAR: Record<Variant, string> = {
-  primary:   "bg-blue-600 hover:bg-blue-700 text-white focus:ring-blue-500",
-  secondary: "bg-gray-200 hover:bg-gray-300 text-gray-800 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200 focus:ring-gray-400",
+  primary:   "bg-transparent hover:bg-custom-hover text-custom-text border border-custom-border focus:ring-blue-500",
+  secondary: "bg-custom-card hover:bg-custom-hover text-custom-text border border-custom-border focus:ring-gray-400",
   danger:    "bg-red-600 hover:bg-red-700 text-white focus:ring-red-500",
-  ghost:     "bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 focus:ring-gray-400",
+  ghost:     "bg-transparent hover:bg-custom-hover text-custom-text focus:ring-gray-400",
   success:   "bg-green-600 hover:bg-green-700 text-white focus:ring-green-500",
 };
 const SZ: Record<Size, string> = {
@@ -41,7 +41,7 @@ export default function Button({
       title={title}
       className={`inline-flex items-center justify-center font-medium rounded-lg transition-all
         focus:outline-none focus:ring-2 focus:ring-offset-2
-        disabled:opacity-50 disabled:cursor-not-allowed
+        disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer
         ${VAR[variant]} ${SZ[size]} ${className}`}
     >
       {loading && <Spinner size="sm" />}

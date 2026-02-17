@@ -38,11 +38,11 @@ export default function ChangePasswordPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center p-4" dir="rtl">
-      <div className="w-full max-w-md bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700">
-        <div className="px-8 py-6 border-b border-gray-200 dark:border-gray-700">
-          <h1 className="text-xl font-bold text-gray-900 dark:text-gray-100">تغییر رمز عبور</h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">رمز عبور جدید خود را تنظیم کنید.</p>
+    <div className="min-h-screen bg-custom-background flex items-center justify-center p-4" dir="rtl">
+      <div className="w-full max-w-md bg-custom-card rounded-2xl shadow-xl border border-custom-border">
+        <div className="px-8 py-6 border-b border-custom-border">
+          <h1 className="text-xl font-bold text-custom-text">تغییر رمز عبور</h1>
+          <p className="text-sm text-custom-muted mt-1">رمز عبور جدید خود را تنظیم کنید.</p>
         </div>
         <form onSubmit={handleSubmit} noValidate className="px-8 py-6 space-y-5">
           {errors.__general__ && (

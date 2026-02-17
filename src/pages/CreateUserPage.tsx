@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import { userService } from "../services/userService";
 import { useToast } from "../contexts/ToastContext";
@@ -20,7 +19,7 @@ export default function CreateUserPage() {
       <div className="flex items-center gap-4">
         <button
           onClick={() => navigate("/users")}
-          className="flex items-center gap-1.5 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+          className="flex items-center gap-1.5 text-sm text-custom-muted hover:text-custom-accent transition-colors"
         >
           <span>←</span>
           <span>بازگشت به لیست</span>
@@ -28,16 +27,16 @@ export default function CreateUserPage() {
       </div>
 
       <div>
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+        <h1 className="text-2xl font-bold text-custom-text">
           افزودن کاربر جدید
         </h1>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-sm text-custom-muted mt-1">
           فرم زیر را تکمیل کنید. فیلدهای ستاره‌دار الزامی هستند.
         </p>
       </div>
 
       {/* Form Card */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-6 sm:p-8">
+      <div className="bg-custom-card rounded-xl border border-custom-border shadow-sm p-6 sm:p-8">
         <UserForm
           onSubmit={handleCreate}
           isEdit={false}

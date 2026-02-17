@@ -20,22 +20,22 @@ interface ToastProps {
 
 const STYLES: Record<ToastType, { bg: string; icon: string; bar: string }> = {
   success: {
-    bg:   "bg-white dark:bg-gray-800 border-l-4 border-green-500",
+    bg:   "bg-custom-card border-l-4 border-green-500",
     icon: "✓",
     bar:  "bg-green-500",
   },
   error: {
-    bg:   "bg-white dark:bg-gray-800 border-l-4 border-red-500",
+    bg:   "bg-custom-card border-l-4 border-red-500",
     icon: "✕",
     bar:  "bg-red-500",
   },
   warning: {
-    bg:   "bg-white dark:bg-gray-800 border-l-4 border-yellow-500",
+    bg:   "bg-custom-card border-l-4 border-yellow-500",
     icon: "⚠",
     bar:  "bg-yellow-500",
   },
   info: {
-    bg:   "bg-white dark:bg-gray-800 border-l-4 border-blue-500",
+    bg:   "bg-custom-card border-l-4 border-blue-500",
     icon: "ℹ",
     bar:  "bg-blue-500",
   },
@@ -97,7 +97,7 @@ export function Toast({ toast, onClose }: ToastProps) {
       className={`
         relative overflow-hidden rounded-lg shadow-lg
         ${style.bg}
-        border border-gray-200 dark:border-gray-700
+        border border-custom-border
         transition-all duration-300 ease-in-out
         ${visible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"}
       `}
@@ -113,10 +113,10 @@ export function Toast({ toast, onClose }: ToastProps) {
 
         {/* Text */}
         <div className="flex-1 min-w-0">
-          <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-0.5">
+          <p className="text-xs font-semibold text-custom-muted mb-0.5">
             {TITLE[type]}
           </p>
-          <p className="text-sm text-gray-800 dark:text-gray-200 leading-snug break-words">
+          <p className="text-sm text-custom-text leading-snug break-words">
             {message}
           </p>
         </div>
@@ -125,7 +125,7 @@ export function Toast({ toast, onClose }: ToastProps) {
         <button
           onClick={handleClose}
           aria-label="بستن"
-          className="shrink-0 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors text-lg leading-none mt-0.5"
+          className="shrink-0 text-custom-muted hover:text-custom-text transition-colors text-lg leading-none mt-0.5"
         >
           ×
         </button>

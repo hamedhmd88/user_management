@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const BASE_URL = "https://safepoint-tech.ir/siem/api/v1";
+// const BASE_URL = "https://safepoint-tech.ir/siem/api/v1";
+const BASE_URL = "/api"; // استفاده از پروکسی Vite برای جلوگیری از مشکل CORS
 
 export const api = axios.create({
   baseURL: BASE_URL,
@@ -8,7 +9,10 @@ export const api = axios.create({
 });
 
 let isRefreshing = false;
-let failedQueue: Array<{ resolve: (v: string) => void; reject: (e: any) => void }> = [];
+let failedQueue: Array<{
+  resolve: (v: string) => void;
+  reject: (e: any) => void;
+}> = [];
 
 function processQueue(error: any, token: string | null) {
   failedQueue.forEach((p) => (error ? p.reject(error) : p.resolve(token!)));

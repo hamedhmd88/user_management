@@ -16,7 +16,7 @@ export default function ConfirmModal({ open, title, message, onConfirm, onCancel
         <Button variant={danger ? "danger" : "primary"} onClick={onConfirm} loading={loading}>{confirmText}</Button>
       </>}
     >
-      <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">{message}</p>
+      <p className="text-custom-text text-sm leading-relaxed">{message}</p>
     </Modal>
   );
 }
