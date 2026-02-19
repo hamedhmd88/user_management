@@ -7,6 +7,7 @@ import {
   formatDate,
   isDefaultUser,
   parseApiErrors,
+  waitForAuth,
 } from "../utils/helpers";
 import Button from "../components/ui/Button";
 import Badge from "../components/ui/Badge";
@@ -138,6 +139,8 @@ export default function UsersListPage() {
     try {
       console.log("Debug - filterActive value:", filterActive);
       console.log("Debug - filterActive type:", typeof filterActive);
+      
+
       
       const params: Record<string, unknown> = {
         page,

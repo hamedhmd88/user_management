@@ -71,7 +71,7 @@ export default function UserForm({
       errs.username = "نام کاربری الزامی است.";
     if (!form.email.trim()) errs.email = "ایمیل الزامی است.";
     if (!isEdit && !form.password) errs.password = "رمز عبور الزامی است.";
-    if (!isEdit && form.password && form.password.length < 8)
+    if (form.password && form.password.length < 8)
       errs.password = "رمز عبور باید حداقل ۸ کاراکتر باشد.";
     if (Object.keys(errs).length) {
       setErrors(errs);
@@ -81,7 +81,7 @@ export default function UserForm({
     setLoading(true);
     setErrors({});
     try {
-      const payload = isEdit
+      const payload: any = isEdit
         ? {
             first_name: form.first_name,
             last_name: form.last_name,
@@ -98,6 +98,11 @@ export default function UserForm({
             is_active: form.is_active,
             profile: form.profile,
           };
+
+      if (isEdit && form.password) {
+        payload.password = form.password;
+      }
+
       console.log("[DEBUG] Sending payload to API:", payload);
       await onSubmit(payload);
     } catch (err) {
@@ -123,17 +128,15 @@ export default function UserForm({
           اطلاعات پایه
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {!isEdit && (
-            <Input
-              label="نام کاربری"
-              name="username"
-              value={form.username}
-              onChange={(e) => setField("username", e.target.value)}
-              error={errors.username}
-              required
-              placeholder="john_doe"
-            />
-          )}
+          <Input
+            label="نام کاربری"
+            name="username"
+            value={form.username}
+            onChange={(e) => setField("username", e.target.value)}
+            error={errors.username}
+            required
+            placeholder="john_doe"
+          />
           <Input
             label="ایمیل"
             name="email"
@@ -143,7 +146,6 @@ export default function UserForm({
             error={errors.email}
             required
             placeholder="email@example.com"
-            className={isEdit ? "sm:col-span-2" : ""}
           />
           <Input
             label="نام"
@@ -203,6 +205,23 @@ export default function UserForm({
         </div>
       </section>
 
+      {isEdit && (
+        <section className="space-y-4 sm:w-1/2">
+          <h3 className="text-xs font-semibold uppercase tracking-widest text-custom-muted">
+            تغییر رمز عبور
+          </h3>
+          <Input
+            label="رمز عبور جدید"
+            name="password"
+            type="password"
+            value={form.password}
+            onChange={(e) => setField("password", e.target.value)}
+            error={errors.password}
+            hint="برای عدم تغییر، خالی بگذارید. حداقل ۸ کاراکتر."
+            placeholder="••••••••"
+          />
+        </section>
+      )}
 
       <div className="flex justify-end pt-2">
         <Button type="submit" loading={loading} size="lg">

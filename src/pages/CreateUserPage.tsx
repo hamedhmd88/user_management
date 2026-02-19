@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { userService } from "../services/userService";
 import { useToast } from "../contexts/ToastContext";
 import UserForm from "../components/users/UserForm";
+import Button from "../components/ui/Button";
 
 export default function CreateUserPage() {
   const navigate = useNavigate();
@@ -17,13 +18,15 @@ export default function CreateUserPage() {
     <div className="space-y-6" dir="rtl">
       {/* Header */}
       <div className="flex items-center gap-4">
-        <button
+        <Button
+        variant="ghost"
+        size="md"
           onClick={() => navigate("/users")}
-          className="flex items-center gap-1.5 text-sm text-custom-muted hover:text-custom-accent transition-colors"
+          className="flex items-center border-1 gap-1.5 text-sm text-custom-muted hover:text-custom-accent transition-colors mr-auto"
         >
-          <span>←</span>
           <span>بازگشت به لیست</span>
-        </button>
+          <span>←</span>
+        </Button>
       </div>
 
       <div>

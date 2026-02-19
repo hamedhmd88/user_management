@@ -39,6 +39,8 @@ export default function LoginPage() {
     setLoading(true);
     try {
       await login(form.username, form.password);
+      // تأخیر کوچک برای اطمینان از به‌روزرسانی state و توکن
+      await new Promise(resolve => setTimeout(resolve, 100));
       navigate("/users", { replace: true });
     } catch (err: unknown) {
       const res =

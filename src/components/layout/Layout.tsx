@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { useTheme } from "../../contexts/ThemeContext";
+import Button from "../ui/Button";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const { logout } = useAuth();
@@ -39,7 +40,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               title={
                 theme === "dark" ? "تغییر به حالت روشن" : "تغییر به حالت تاریک"
               }
-className="p-2 rounded-lg hover:bg-custom-hover transition-colors text-xl cursor-pointer"            >
+              className="p-2 rounded-lg hover:bg-custom-hover transition-colors text-xl cursor-pointer"
+            >
               {theme === "dark" ? (
                 <span role="img" aria-label="sun">
                   ☀️
@@ -50,15 +52,16 @@ className="p-2 rounded-lg hover:bg-custom-hover transition-colors text-xl cursor
                 </span>
               )}
             </button>
-            <button
+            <Button
               onClick={() => {
                 logout();
                 navigate("/login");
               }}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg text-custom-text hover:bg-custom-hover transition-colors"
+              className="flex items-center border-1 gap-1.5 px-3 py-1.5 text-sm rounded-lg text-custom-text hover:bg-custom-hover transition-colors"
             >
-              خروج <span>→</span>
-            </button>
+              خروج
+              <span> ← </span>
+            </Button>
           </div>
         </div>
       </header>

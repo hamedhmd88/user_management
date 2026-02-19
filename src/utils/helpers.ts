@@ -105,3 +105,31 @@ export function coerceBoolean(value: unknown): boolean {
   }
   return Boolean(value);
 }
+
+// Helper برای اطمینان از وجود توکن معتبر
+export const ensureValidToken = async (): Promise<boolean> => {
+  const token = localStorage.getItem("access_token");
+  if (!token) return false;
+  
+  // اگر توکن وجود داره ولی expired هست، سعی کن رفرش کنی
+  const refresh = localStorage.getItem("refresh_token");
+  if (!refresh) return false;
+  
+  try {
+    // این فقط یه چک ساده هست، اگر نیاز به رفرش باشه توسط interceptor انجام می‌شه
+    return true;
+  } catch {
+    return false;
+  }
+};
+
+// Helper برای صبر کردن تا auth state آماده بشه
+export const waitForAuth = async (maxWait = 2000): Promise<boolean> => {
+  const start = Date.now();
+  while (Date.now() - start < maxWait) {
+    const token = localStorage.getItem("access_token");
+    if (token) return true;
+    await new Promise(resolve => setTimeout(resolve, 100));
+  }
+  return false;
+};

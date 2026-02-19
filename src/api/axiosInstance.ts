@@ -1,7 +1,7 @@
+
 import axios from "axios";
 
-// const BASE_URL = "https://safepoint-tech.ir/siem/api/v1";
-const BASE_URL = "/api"; // استفاده از پروکسی Vite برای جلوگیری از مشکل CORS
+const BASE_URL = "/siem/api/v1";
 
 export const api = axios.create({
   baseURL: BASE_URL,
@@ -19,65 +19,90 @@ function processQueue(error: any, token: string | null) {
   failedQueue = [];
 }
 
-// ── Attach token ──────────────────────────────────────────────
+// ── Attach token ───────────────────────────────
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("access_token");
-  if (token) config.headers["Authorization"] = `Bearer ${token}`;
+  if (token) {
+    config.headers = config.headers ?? {};
+    config.headers.Authorization = `Bearer ${token}`;
+  }
   return config;
 });
 
-// ── Auto-refresh on 401 ───────────────────────────────────────
+// ── Refresh on 401 ─────────────────────────────
 api.interceptors.response.use(
   (res) => res,
   async (error) => {
-    const orig = error.config;
+    const original = error.config;
     if (!error.response) return Promise.reject(error);
 
-    const { status } = error.response;
-    const isAuthUrl =
-      orig.url?.includes("/auth/token/") ||
-      orig.url?.includes("/auth/token/refresh/");
+   if (error.response.status === 401 && !original._retry) {
+  // رمز عبور منقضی شده
+  if (error.response.data?.code === "password_expired") {
+    window.location.href = "/change-password";
+    return Promise.reject(error);
+  }
 
-    if (status === 401 && !orig._retry && !isAuthUrl) {
+  // ✅ این رو اضافه کن
+//   if (error.response.data?.code === "inactivity_timeout") {
+//     localStorage.clear();
+//     window.location.href = "/login";
+//     return Promise.reject(error);
+//   }
+
+      // ❌ اگه خود login 401 داد، refresh نکن
+      if (original.url?.includes("/auth/token/") && 
+          !original.url?.includes("/auth/token/refresh/")) {
+        return Promise.reject(error);
+      }
+
+      // ❌ اگه refresh هم 401 داد، برو login
+      if (original.url?.includes("/auth/token/refresh/")) {
+        localStorage.clear();
+        window.location.href = "/login";
+        return Promise.reject(error);
+      }
+
+      // صف درخواست‌های موازی
       if (isRefreshing) {
         return new Promise<string>((resolve, reject) =>
           failedQueue.push({ resolve, reject })
         ).then((token) => {
-          orig.headers["Authorization"] = `Bearer ${token}`;
-          return api(orig);
+          original.headers.Authorization = `Bearer ${token}`;
+          return api(original);
         });
       }
 
-      orig._retry = true;
+      original._retry = true;
       isRefreshing = true;
 
       const refresh = localStorage.getItem("refresh_token");
       if (!refresh) {
-        isRefreshing = false;
         localStorage.clear();
         window.location.href = "/login";
         return Promise.reject(error);
       }
 
       try {
-        const { data } = await axios.post(`${BASE_URL}/auth/token/refresh/`, {
-          refresh,
-        });
+        const { data } = await axios.post(
+          `${BASE_URL}/auth/token/refresh/`,
+          { refresh },
+          { headers: { "Content-Type": "application/json" } }
+        );
         localStorage.setItem("access_token", data.access);
-        api.defaults.headers["Authorization"] = `Bearer ${data.access}`;
         processQueue(null, data.access);
-        orig.headers["Authorization"] = `Bearer ${data.access}`;
-        return api(orig);
-      } catch (refreshErr) {
-        processQueue(refreshErr, null);
-        localStorage.removeItem("access_token");
-        localStorage.removeItem("refresh_token");
+        original.headers.Authorization = `Bearer ${data.access}`;
+        return api(original);
+      } catch (e) {
+        processQueue(e, null);
+        localStorage.clear();
         window.location.href = "/login";
-        return Promise.reject(refreshErr);
+        return Promise.reject(e);
       } finally {
         isRefreshing = false;
       }
     }
+
     return Promise.reject(error);
   }
 );

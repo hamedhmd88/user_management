@@ -26,7 +26,7 @@ export default function Input({
   return (
     <div className={`flex flex-col gap-1 ${className}`}>
       {label && (
-        <label htmlFor={name} className="text-sm font-medium text-gray-700 dark:text-gray-300">
+        <label htmlFor={name} className="text-sm font-medium ">
           {label}{required && <span className="text-red-500 mr-1">*</span>}
         </label>
       )}

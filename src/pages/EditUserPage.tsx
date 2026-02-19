@@ -1,4 +1,4 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { userService } from "../services/userService";
 import { useToast } from "../contexts/ToastContext";
@@ -7,6 +7,7 @@ import UserForm from "../components/users/UserForm";
 import Spinner from "../components/ui/Spinner";
 import ErrorState from "../components/common/ErrorState";
 import type { User } from "../types";
+import Button from "../components/ui/Button";
 
 export default function EditUserPage() {
   const { id } = useParams<{ id: string }>();
@@ -90,12 +91,6 @@ export default function EditUserPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-4">
-        <button
-          onClick={() => navigate("/users")}
-          className="text-sm text-custom-muted hover:text-custom-accent transition-colors"
-        >
-          ← بازگشت
-        </button>
         <div>
           <h1 className="text-2xl font-bold text-custom-text">
             ویرایش: {user.username}
@@ -104,6 +99,15 @@ export default function EditUserPage() {
             اطلاعات کاربر را ویرایش کنید.
           </p>
         </div>
+        <Button
+          type="button"
+          size="sm"
+          variant="ghost"
+          onClick={() => navigate("/users")}
+          className="text-sm text-custom-muted border-1  hover:text-custom-accent transition-colors mr-auto"
+        >
+          بازگشت ←
+        </Button>
       </div>
       <div className="bg-custom-card rounded-xl border border-custom-border p-6">
         <UserForm
