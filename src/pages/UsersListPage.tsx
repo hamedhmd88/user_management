@@ -7,7 +7,6 @@ import {
   formatDate,
   isDefaultUser,
   parseApiErrors,
-  waitForAuth,
 } from "../utils/helpers";
 import Button from "../components/ui/Button";
 import Badge from "../components/ui/Badge";
@@ -360,7 +359,7 @@ export default function UsersListPage() {
                       </td>
                       <td className="px-4 py-3 text-center">
                         <div className="flex items-center gap-2">
-                          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white text-xs font-bold shrink-0">
+                          <div className="w-8 h-8 rounded-full bg-linear-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white text-xs font-bold shrink-0">
                             {(u.username?.[0] ?? "?").toUpperCase()}
                           </div>
                           <div>

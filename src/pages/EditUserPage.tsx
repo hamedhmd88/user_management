@@ -104,7 +104,7 @@ export default function EditUserPage() {
           size="sm"
           variant="ghost"
           onClick={() => navigate("/users")}
-          className="text-sm text-custom-muted border-1  hover:text-custom-accent transition-colors mr-auto"
+          className="text-sm text-custom-muted border  hover:text-custom-accent transition-colors mr-auto"
         >
           بازگشت ←
         </Button>

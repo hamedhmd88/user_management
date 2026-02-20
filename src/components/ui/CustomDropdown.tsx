@@ -9,7 +9,7 @@ interface Props {
   required?: boolean; disabled?: boolean; className?: string;
 }
 
-export default function CustomDropdown({ label, name, value, onChange, options, error, required, disabled, className = "" }: Props) {
+export default function CustomDropdown({ label,  value, onChange, options, error, required, disabled, className = "" }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const selectedOption = options.find(opt => opt.value === value);

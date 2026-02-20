@@ -116,7 +116,7 @@ export function Toast({ toast, onClose }: ToastProps) {
           <p className="text-xs font-semibold text-custom-muted mb-0.5">
             {TITLE[type]}
           </p>
-          <p className="text-sm text-custom-text leading-snug break-words">
+          <p className="text-sm text-custom-text leading-snug wrap-break-word">
             {message}
           </p>
         </div>

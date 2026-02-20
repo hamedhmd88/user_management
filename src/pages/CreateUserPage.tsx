@@ -22,7 +22,7 @@ export default function CreateUserPage() {
         variant="ghost"
         size="md"
           onClick={() => navigate("/users")}
-          className="flex items-center border-1 gap-1.5 text-sm text-custom-muted hover:text-custom-accent transition-colors mr-auto"
+          className="flex items-center border gap-1.5 text-sm text-custom-muted hover:text-custom-accent transition-colors mr-auto"
         >
           <span>بازگشت به لیست</span>
           <span>←</span>

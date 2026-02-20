@@ -75,7 +75,7 @@ function UserAvatar({ username }: { username: string }) {
   const idx = (username.charCodeAt(0) || 0) % colors.length;
   return (
     <div
-      className={`w-8 h-8 rounded-full bg-gradient-to-br ${colors[idx]} flex items-center justify-center text-white text-xs font-bold shrink-0 select-none`}
+      className={`w-8 h-8 rounded-full bg-linear-to-br ${colors[idx]} flex items-center justify-center text-white text-xs font-bold shrink-0 select-none`}
     >
       {(username?.[0] ?? "?").toUpperCase()}
     </div>

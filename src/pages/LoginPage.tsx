@@ -100,12 +100,12 @@ export default function LoginPage() {
 
   return (
     <div
-      className="min-h-screen bg-gradient-to-br from-custom-card via-custom-card to-custom-hover dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 flex items-center justify-center p-4"
+      className="min-h-screen bg-linear-to-br from-custom-card via-custom-card to-custom-hover dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 flex items-center justify-center p-4"
       dir="rtl"
     >
       <div className="w-full max-w-md">
         <div className="bg-custom-card rounded-2xl shadow-xl border border-custom-border overflow-hidden">
-          <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-10 text-center">
+          <div className="bg-linear-to-r from-blue-600 to-indigo-600 px-8 py-10 text-center">
             <div className="text-5xl mb-3">🛡️</div>
             <h1 className="text-2xl font-bold text-white">ورود به سیستم</h1>
             <p className="text-blue-100 text-sm mt-1">SafePoint SIEM</p>

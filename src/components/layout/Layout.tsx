@@ -57,7 +57,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 logout();
                 navigate("/login");
               }}
-              className="flex items-center border-1 gap-1.5 px-3 py-1.5 text-sm rounded-lg text-custom-text hover:bg-custom-hover transition-colors"
+              className="flex items-center border gap-1.5 px-3 py-1.5 text-sm rounded-lg text-custom-text hover:bg-custom-hover transition-colors"
             >
               خروج
               <span> ← </span>
