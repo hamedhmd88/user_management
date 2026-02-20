@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import { formatDate, isDefaultUser } from "../../utils/helpers";
 import Badge from "../ui/Badge";

@@ -1,4 +1,3 @@
-import React from "react";
 
 export default function EmptyState({ message = "هیچ موردی یافت نشد" }: { message?: string }) {
   return (
