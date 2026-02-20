@@ -4,13 +4,22 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   plugins: [tailwindcss()],
+  // server: {
+  //   proxy: {
+  //     "/siem": {
+  //       target: "https://safepoint-tech.ir",
+  //       changeOrigin: true,
+  //       secure: false,
+  //     },
+  //   },
+  // },
   server: {
-    proxy: {
-      "/siem": {
-        target: "https://safepoint-tech.ir",
-        changeOrigin: true,
-        secure: false,
-      },
+  proxy: {
+    "/siem": {
+      target: "https://safepoint-tech.ir",
+      changeOrigin: true,
+      secure: false,
     },
   },
+},
 });

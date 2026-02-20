@@ -1,7 +1,7 @@
 
 import axios from "axios";
 
-const BASE_URL = "/siem/api/v1";
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || "/siem/api/v1";
 
 export const api = axios.create({
   baseURL: BASE_URL,
